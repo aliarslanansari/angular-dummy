@@ -1,5 +1,8 @@
-<textarea rows="6" [value]='newPost' #postInput></textarea>
+<mat-form-field>
+    <textarea matInput rows="6" [(ngModel)]="enteredValue"></textarea>
+</mat-form-field>
 <hr>
-<button type="submit" (click)='onAddPost(postInput)'>Save Post</button> <br>
+<button type="submit" (click)='onAddPost()'>Save Post</button> <br>
 <p>{{ newPost }}</p>
-    
+    {{enteredValue}}
+
