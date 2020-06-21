@@ -7,6 +7,7 @@
             name='title'
             ngModel
             minlength='3'
+            placeholder="Post Title"
             #title='ngModel'
             required>
             <mat-error *ngIf="title.invalid">Please Enter Title with atleast 3 character long!</mat-error>
@@ -18,10 +19,11 @@
                 name='content' 
                 ngModel
                 required
+                placeholder="Post Content"
                 #content='ngModel'
                 >
             </textarea>
-            <mat-error *ngIf="content.invalid">Please Enter Title with atleast 3 character long!</mat-error>
+            <mat-error *ngIf="content.invalid">Please Enter Content!</mat-error>
         </mat-form-field>
         <button 
             mat-raised-button
