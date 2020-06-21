@@ -1,17 +1,31 @@
 <mat-card>
+<form (submit)="onAddPost(postForm)" #postForm="ngForm">
     <mat-form-field>
-        <textarea 
-            matInput 
-            rows="3" 
-            [(ngModel)]="enteredValue">
-        </textarea>
+        <input 
+            type="text" 
+            matInput
+            name='title'
+            ngModel
+            minlength='3'
+            #title='ngModel'
+            required>
+            <mat-error *ngIf="title.invalid">Please Enter Title with atleast 3 character long!</mat-error>
     </mat-form-field>
-    <button 
-        mat-raised-button
-        color='primary'
-        (click)='onAddPost()'>
-        Save Post
-    </button>
+        <mat-form-field>
+            <textarea 
+                matInput 
+                rows="3"
+                name='content' 
+                ngModel
+                required
+                #content='ngModel'
+                >
+            </textarea>
+            <mat-error *ngIf="content.invalid">Please Enter Title with atleast 3 character long!</mat-error>
+        </mat-form-field>
+        <button 
+            mat-raised-button
+            color='primary'
+            type="submit">Save Post</button>
+</form>
 </mat-card>
-<p>{{ newPost }}</p>
-    {{enteredValue}}
