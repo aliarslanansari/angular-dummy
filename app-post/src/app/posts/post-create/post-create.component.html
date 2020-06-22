@@ -13,6 +13,10 @@
             required>
             <mat-error *ngIf="title.invalid">Please Enter Title with atleast 3 character long!</mat-error>
     </mat-form-field>
+    <div>
+        <button mat-stroked-button color='primary' type="button" (click)="filepicker.click()">Pick Image</button>
+        <input type="file" #filepicker>
+    </div>
         <mat-form-field>
             <textarea 
                 matInput 
@@ -20,7 +24,7 @@
                 name='content' 
                 [ngModel]="post?.content"
                 required
-                placeholder="Post Content"
+          olor='primary'   placeholder="Post Content"
                 #content='ngModel'
                 >
             </textarea>
