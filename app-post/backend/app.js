@@ -15,23 +15,6 @@ mongoose.connect("mongodb://localhost:27017/posts-angular",config)
 })
 .catch(err => console.log(err));
 
-const posts = [
-    {
-        id: 'q2323',
-        title: 'First Post',
-        content: '1 post'
-    },
-    {
-        id: 'q1123',
-        title: 'Second Post',
-        content: '2 post'
-    },
-    {
-        id: 'q2322',
-        title: 'Third Post',
-        content: '3 post'
-    },
-]
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended:false }));
@@ -49,11 +32,12 @@ app.post('/api/posts', (req, res,next) => {
         content:req.body.content
     })
     console.log(post)
-    post.save();
-    posts.push(post);    
-    res.status(201).json({
-        message: 'Post Added Successfully'
-    })
+    post.save().then((results)=>{
+        res.status(201).json({
+            message: 'Post Added Successfully',
+            postId:results._id
+        });
+    });
 });
 
 app.get('/api/posts',(req,res,next)=>{
@@ -63,7 +47,14 @@ app.get('/api/posts',(req,res,next)=>{
             posts:documents
         });
     })
-   
+});
+
+app.delete('/api/posts/:id',(req,res,next)=>{
+    console.log(req.params.id);
+    Post.deleteOne({_id:req.params.id}).then(result=>{
+        console.log(result);
+        res.status(200).json({ message:'Post Deleted' });
+    })
 });
 
 module.exports = app;
