@@ -4,11 +4,9 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-
 @Injectable({providedIn:'root'})
 export class PostsService {
     constructor(private http:HttpClient){}
-
     private postsUpdated = new Subject<Post[]>();
     private posts: Post[] = [];
     getPosts(){
@@ -41,7 +39,9 @@ export class PostsService {
             this.postsUpdated.next([...this.posts]);
         });
     }
-
+    getOnePost(id:string){
+        return {...this.posts.find(p=> p.id == id)};
+    }
     deletePost(postId:string){
         this.http.delete('http://localhost:3000/api/posts/'+postId)
         .subscribe(()=>{
@@ -50,5 +50,13 @@ export class PostsService {
             this.posts = updatedPosts;
             this.postsUpdated.next([...this.posts]);
         });
+    }
+    updatePost(id:string, title:string, content:string){
+        const post: Post = {id:id, title:title, content:content};
+        this.http.put('http://localhost:3000/api/posts/'+id,post)
+        .subscribe((res)=>{
+            console.log(res);
+        })
+
     }
 }
