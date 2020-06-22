@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 import { PostCreateComponent }  from './posts/post-create/post-create.component';
 import { AppComponent } from './app.component';
@@ -33,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
