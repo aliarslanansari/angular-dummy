@@ -1,7 +1,7 @@
 import { PostsService } from './../posts.service';
 import { Component, OnInit } from "@angular/core";
 import { Post } from './../post.model';
-import { NgForm } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
     selector:'app-post-create',
@@ -12,11 +12,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class PostCreateComponent implements OnInit{
     private mode = 'create';
     private postId: string;
+    form:FormGroup;
     post: Post;
     isLoading: boolean  = false;
     constructor(public PostsService: PostsService, public route:ActivatedRoute){}
 
-    onAddPost(form:NgForm){
+    onAddPost(){
         if(form.invalid){
             return
         }
