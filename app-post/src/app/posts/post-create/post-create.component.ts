@@ -12,7 +12,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class PostCreateComponent implements OnInit{
     private mode = 'create';
     private postId: string;
-    private post: Post;
+    post: Post;
     constructor(public PostsService: PostsService, public route:ActivatedRoute){}
 
     onAddPost(form:NgForm){
