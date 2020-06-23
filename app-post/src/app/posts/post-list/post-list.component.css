@@ -9,3 +9,13 @@
 mat-spinner{
     margin: auto;
 }
+
+.post-images{
+    width: 100%;
+}
+.post-images img{
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    max-height: 500px;
+}
