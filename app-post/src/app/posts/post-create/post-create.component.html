@@ -1,29 +1,31 @@
 <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-<form (submit)="onAddPost()" *ngIf="!isLoading">
+<form [formGroup]="form" (submit)="onAddPost()" *ngIf= "!isLoading">
     <mat-form-field>
         <input 
             type="text" 
             matInput
             name='title'
+            formControlName='title'
             placeholder="Post Title"
             >
-            <mat-error *ngIf="title.invalid">Please Enter Title with atleast 3 character long!</mat-error>
+            <mat-error *ngIf="form.get('title').invalid">Please Enter Title with atleast 3 character long!</mat-error>
     </mat-form-field>
     <div>
         <button mat-stroked-button color='primary' type="button" (click)="filepicker.click()">Pick Image</button>
-        <input type="file" #filepicker>
+        <input type="file" #filepicker (change)="onImagePicked($event)">
     </div>
         <mat-form-field>
             <textarea 
                 matInput 
                 rows="3"
                 name='content' 
+                formControlName='content'
                 color='primary'   
                 placeholder="Post Content"
                 >
             </textarea>
-            <mat-error *ngIf="content.invalid">Please Enter Content!</mat-error>
+            <mat-error *ngIf="form.get('content').invalid">Please Enter Content!</mat-error>
         </mat-form-field>
         <button 
             mat-raised-button
