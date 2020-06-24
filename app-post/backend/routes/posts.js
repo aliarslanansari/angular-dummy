@@ -101,17 +101,15 @@ router.put(
         const url = req.protocol + "://" + req.get("host");
         imagePath = url + "/images/" + req.file.filename
       }
-      console.log('OMADA ============= ',imagePath);
       const post = {
         title: req.body.title,
         content: req.body.content,
         imagePath: imagePath
       };
-      console.log('PDPD = = = = ',post);
       Post.updateOne({ _id: req.params.id }, post).then(result => {
         res.status(200).json({ message: "Update successful!" });
       });
     }
   );
-
 module.exports = router
+
