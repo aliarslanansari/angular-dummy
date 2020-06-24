@@ -73,24 +73,45 @@ router.delete('/:id',(req,res,next)=>{
     })
 });
 
-router.put('/:id',multer({storage:storage}).single("image"), (req, res) => {
-    console.log(req.file)   
-    console.log(req.body.imagePath)   
-    let imagePath = req.body.imagePath;
-    if(req.file){
-        const url = req.protocol+'://'+req.get('host');
-        imagePath: url + "/images/" + req.file.filename
+// router.put('/:id',multer({storage:storage}).single("image"), (req, res) => {
+//     console.log(req.file)   
+//     console.log(req.body.imagePath)
+//     let imagePath = req.body.imagePath;
+//     if(req.file){
+//         const url = req.protocol+'://'+req.get('host');
+//         imagePath: url + "/images/" + req.file.filename
+//     }
+//     const post = new Post ({
+//         _id:req.body.id,
+//         title:req.body.title,
+//         content:req.body.content,
+//         imagePath:imagePath
+//     })
+//     Post.updateOne({_id:req.params.id},post).then(result=>{
+//         console.log(result);
+//         res.status(200).json({ message:'Post Edited' });
+//     })
+// });
+router.put(
+    "/:id",
+    multer({ storage: storage }).single("image"),
+    (req, res, next) => {
+      let imagePath = req.body.imagePath;
+      if (req.file) {
+        const url = req.protocol + "://" + req.get("host");
+        imagePath = url + "/images/" + req.file.filename
+      }
+      console.log('OMADA ============= ',imagePath);
+      const post = {
+        title: req.body.title,
+        content: req.body.content,
+        imagePath: imagePath
+      };
+      console.log('PDPD = = = = ',post);
+      Post.updateOne({ _id: req.params.id }, post).then(result => {
+        res.status(200).json({ message: "Update successful!" });
+      });
     }
-    const post = new Post ({
-        _id:req.body.id,
-        title:req.body.title,
-        content:req.body.content,
-        imagePath:imagePath
-    })
-    Post.updateOne({_id:req.params.id},post).then(result=>{
-        console.log(result);
-        res.status(200).json({ message:'Post Edited' });
-    })
-});
+  );
 
 module.exports = router
