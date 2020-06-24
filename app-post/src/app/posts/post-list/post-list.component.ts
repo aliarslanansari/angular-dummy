@@ -15,7 +15,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   //   {title:'Second Post', content:'This is the second post\' Content'},
   //   {title:'Third Post', content:'This is the third post\' Content'},
   // ]
-  totalPosts = 10;
+  totalPosts = 0;
   postPerPage =2;
   currentPage = 1;
   pageSizeOptions = [1,2,5,10];
@@ -30,6 +30,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsSub = this.PostsService.getPostUpdateListener()
     .subscribe((postData: {posts:Post[], postCount:number})=>{
       this.posts = postData.posts;
+      this.totalPosts = postData.postCount;
       this.isLoading = false;
     });
   }

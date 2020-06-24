@@ -52,7 +52,7 @@ router.get('',(req,res,next)=>{
         postQuery.skip((currentPage-1)*pageSize)
         .limit(pageSize);
     }
-    postQuery.then(documents=>{
+    postQuery.then((documents)=>{
         fetchedPosts = documents;
         return Post.count();
     }).then(count=>{
