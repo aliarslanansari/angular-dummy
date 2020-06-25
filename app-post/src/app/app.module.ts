@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './auth/auth-interceptor';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,7 +18,7 @@ import { PostCreateComponent }  from './posts/post-create/post-create.component'
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignUpComponent } from './auth/signup/signup.component';
   
 @NgModule({
@@ -44,7 +45,7 @@ import { SignUpComponent } from './auth/signup/signup.component';
     HttpClientModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { } 
