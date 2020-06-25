@@ -39,6 +39,7 @@ export class AuthService {
                 console.log(expirationDate);
                 this.saveAuthData(token, expirationDate);
                 this.router.navigate(['/']);
+                
             }
             
         });
