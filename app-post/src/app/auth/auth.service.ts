@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
     private token: string;
     isAuthenticated = false;
+    private tokenTimer: NodeJS.Timer;
     private authStatusListener = new Subject<boolean>();
 
     constructor(private http:HttpClient, private router:Router){}
@@ -30,11 +31,15 @@ export class AuthService {
             this.token = token;
             if(token){
                 const expiresInDuration = response.expiresIn;
-                setTimeout(()=>{
+                this.tokenTimer = setTimeout(()=>{
                     this.logout();
-                },3600)
+                },expiresInDuration)
                 this.authStatusListener.next(true);
                 this.isAuthenticated = true;
+                const now = new Date();
+                const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+                console.log(expirationDate);
+                this.saveAuthData(token, expirationDate);
                 this.router.navigate(['/']);
             }
             
@@ -46,6 +51,8 @@ export class AuthService {
         this.isAuthenticated = false;
         this.authStatusListener.next(false);
         this.router.navigate(['/']);
+        this.clearAuthData();
+        clearTimeout(this.tokenTimer);
     }
     getToken(){
         return this.token;
@@ -55,5 +62,13 @@ export class AuthService {
     }
     getIsAuth(){
         return this.isAuthenticated;
+    }
+    private saveAuthData(token:string, expirationDate:Date){
+        localStorage.setItem('token',token);
+        localStorage.setItem('expiration',expirationDate.toISOString());
+    }
+    private clearAuthData(){
+        localStorage.removeItem('token');
+        localStorage.removeItem('expiration');
     }
 }
