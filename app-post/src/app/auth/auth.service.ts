@@ -20,7 +20,10 @@ export class AuthService {
         .subscribe(response=>{
             console.log(response);
             this.router.navigate(['/']);
-        })
+        },error=>{
+            this.authStatusListener.next(false);
+        }
+        )
     }
 
     getUserId(){
@@ -46,6 +49,8 @@ export class AuthService {
                 this.router.navigate(['/']);
             }
             
+        }, error=>{
+            this.authStatusListener.next(false);
         });
 
     }
