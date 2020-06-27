@@ -85,7 +85,7 @@ router.delete('/:id',checkAuth,(req,res,next)=>{
         console.log(result);
         if(result.n>0){
             res.status(200).json({ message: "Update successful!" });
-          }else
+          }else{
             res.status(401).json({ message: "Not Authorised" });
         }
     })
