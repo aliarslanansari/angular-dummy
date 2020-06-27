@@ -1,3 +1,4 @@
+import { ErrorComponent } from './error/error.component';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -10,7 +11,7 @@ export class ErrorInterceptor implements HttpInterceptor{
         return next.handle(req).pipe(
             catchError((error:HttpErrorResponse)=>{
                 console.log(console.error); 
-                alert(error.error.error.message);
+                this.dialog.open(ErrorComponent);
                 return throwError(error);
             })
         );

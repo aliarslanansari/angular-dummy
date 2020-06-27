@@ -1,3 +1,4 @@
+import { ErrorComponent } from './error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { LoginComponent } from './auth/login/login.component';
@@ -30,7 +31,8 @@ import { SignUpComponent } from './auth/signup/signup.component';
     HeaderComponent,
     PostListComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { SignUpComponent } from './auth/signup/signup.component';
     {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ErrorComponent]
 })
 export class AppModule { } 
