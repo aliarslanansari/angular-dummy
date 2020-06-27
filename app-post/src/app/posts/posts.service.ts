@@ -20,13 +20,15 @@ export class PostsService {
                     title : fetchedpost.title,
                     content:fetchedpost.content,
                     id: fetchedpost._id,
-                    imagePath: fetchedpost.imagePath
+                    imagePath: fetchedpost.imagePath,
+                    creator: fetchedpost.creator,
                 }
             }),
             maxPosts: postData.maxPosts
         };
         }))
         .subscribe((transformedPostsData)=>{
+            console.log(transformedPostsData)
             this.posts = transformedPostsData.post;
             this.postsUpdated.next({posts:[...this.posts],postCount:transformedPostsData.maxPosts});
         });
