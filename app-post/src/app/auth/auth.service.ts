@@ -50,8 +50,7 @@ export class AuthService {
             }
             
         }, error=>{
-            this.authStatusListener.next(false);
-            
+            this.authStatusListener.next(false); 
         });
 
     }
