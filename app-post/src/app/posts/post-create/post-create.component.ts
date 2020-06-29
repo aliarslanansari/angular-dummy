@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { PostsService } from './../posts.service';
 import { Component, OnInit } from "@angular/core";
 import { Post } from './../post.model';
@@ -17,6 +18,7 @@ export class PostCreateComponent implements OnInit{
     post: Post;
     imagePreview: string;
     isLoading: boolean  = false;
+    private authStatusSub:Subscription;
     constructor(public PostsService: PostsService, public route:ActivatedRoute){}
 
     ngOnInit(){
