@@ -69,6 +69,11 @@ router.get('',(req,res,next)=>{
             maxPosts:count
         });
     })
+    .catch(error=>{
+        res.status(500).json({
+            message:"Couldn't fetch the post!"
+        });
+    });
 });
 
 router.get('/:id', (req, res,next) => {
@@ -82,6 +87,11 @@ router.get('/:id', (req, res,next) => {
             });
         }
     })
+    .catch(error=>{
+        res.status(500).json({
+            message:"Couldn't fetch the post!"
+        });
+    });
 });
 
 router.delete('/:id',checkAuth,(req,res,next)=>{
@@ -94,6 +104,11 @@ router.delete('/:id',checkAuth,(req,res,next)=>{
             res.status(401).json({ message: "Not Authorised" });
         }
     })
+    .catch(error=>{
+        res.status(500).json({
+            message:"Couldn't Delete the post!"
+        });
+    });
 });
 
 // router.put('/:id',multer({storage:storage}).single("image"), (req, res) => {
