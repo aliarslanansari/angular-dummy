@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { PostsService } from './../posts.service';
 import { Component, OnInit } from "@angular/core";
@@ -17,11 +18,15 @@ export class PostCreateComponent implements OnInit{
   form:FormGroup;
   post: Post;
   imagePreview: string;
+  private authService:AuthService;
   isLoading: boolean  = false;
   private authStatusSub:Subscription;
   constructor(public PostsService: PostsService, public route:ActivatedRoute){}
   
   ngOnInit(){
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe((authStatus)=>{
+      this.isLoading = false;
+    });
     this.form = new FormGroup({
       'title':new FormControl(null,{validators:[Validators.required,Validators.minLength(3)]}),
       'content':new FormControl(null, {validators:[Validators.required]}),
