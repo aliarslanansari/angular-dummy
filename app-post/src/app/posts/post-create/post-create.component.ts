@@ -1,7 +1,7 @@
 import { AuthService } from './../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { PostsService } from './../posts.service';
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Post } from './../post.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -12,7 +12,7 @@ import { mimeType } from './mime-type.validator';
   styleUrls:['./post-create.component.css']
 })
 
-export class PostCreateComponent implements OnInit{
+export class PostCreateComponent implements OnInit, OnDestroy{
   private mode = 'create';
   private postId: string;
   form:FormGroup;
@@ -86,5 +86,8 @@ export class PostCreateComponent implements OnInit{
           this.imagePreview = reader.result as string;
         };
         reader.readAsDataURL(file);
+      }
+      ngOnDestroy(): void {
+        this.authStatusSub.unsubscribe()
       }
     }
