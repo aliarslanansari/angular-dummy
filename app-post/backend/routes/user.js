@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
     .then(user=>{
         if(!user){
             return res.status(401).json({
-                message:"Auth failed"
+                message:"Invalid Authentication Credentials!"
             });
         }
         fetchedUser = user;

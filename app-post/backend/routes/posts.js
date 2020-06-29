@@ -42,6 +42,11 @@ router.post('', checkAuth, multer({storage:storage}).single("image"), (req, res,
                 id:results._id
             }
         });
+    })
+    .catch(error=>{
+        res.status(500).json({
+            message:'Creating a post failed!'
+        });
     });
 });
 
@@ -132,7 +137,12 @@ router.put(
           }else{
             res.status(401).json({ message: "Not Authorised" });
           }
-      });
+      })
+      .catch(error=>{
+        res.status(500).json({
+            message:"Couldn't update the post!"
+        });
+    });
     }
   );
 module.exports = router
