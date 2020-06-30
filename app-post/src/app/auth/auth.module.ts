@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './../angular-material.module';
 import { SignUpComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
     ],
     imports:[
         CommonModule,
-        AngularMaterialModule
+        AngularMaterialModule,
+        FormsModule,
     ]
 })
 export class AuthModule{}
