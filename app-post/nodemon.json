@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USERNAME":"ali",
+        "MONGO_ATLAS_PW":"G4w4QrME0pymgOIM",
+        "MONGO_DB_NAME":"yourposts",
+        "JWT_KEY":"secret_this_should_be_longer"
+    }
+}

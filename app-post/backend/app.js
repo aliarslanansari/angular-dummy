@@ -10,7 +10,11 @@ const config = {
     useUnifiedTopology: true,
     useNewUrlParser:    true,
 };
-mongoose.connect("mongodb://localhost:27017/posts-angular",config)
+
+const DB_URL = "mongodb+srv://"+process.env.MONGO_USERNAME+":"+process.env.MONGO_ATLAS_PW+"@mongoali-qcgnw.mongodb.net/"+process.env.MONGO_DB_NAME;
+console.log(DB_URL);
+// "mongodb://localhost:27017/posts-angular"
+mongoose.connect(DB_URL,config)
 .then(()=>{
     console.log('Connnected to Database!')
 })
