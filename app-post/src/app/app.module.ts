@@ -20,8 +20,6 @@ import { SignUpComponent } from './auth/signup/signup.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent,
-    SignUpComponent,
     ErrorComponent
   ],
   imports: [
