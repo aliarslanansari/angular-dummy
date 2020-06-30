@@ -18,15 +18,13 @@ export class PostCreateComponent implements OnInit, OnDestroy{
   form:FormGroup;
   post: Post;
   imagePreview: string;
-  private authService:AuthService;
+  
   isLoading: boolean  = false;
   private authStatusSub:Subscription;
-  constructor(public PostsService: PostsService, public route:ActivatedRoute){}
+  constructor(public PostsService: PostsService, public route:ActivatedRoute,private authService:AuthService){}
   
   ngOnInit(){
-    this.authStatusSub = this.authService.getAuthStatusListener().subscribe((authStatus)=>{
-      this.isLoading = false;
-    });
+    
     this.form = new FormGroup({
       'title':new FormControl(null,{validators:[Validators.required,Validators.minLength(3)]}),
       'content':new FormControl(null, {validators:[Validators.required]}),
@@ -52,7 +50,10 @@ export class PostCreateComponent implements OnInit, OnDestroy{
                     this.postId = null;
                   }
                 });
-              }
+                this.authStatusSub = this.authService.getAuthStatusListener().subscribe((authStatus)=>{
+                  this.isLoading = false;
+                });
+          }
               
               onAddPost(){
                 if (this.form.invalid) {

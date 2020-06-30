@@ -54,7 +54,6 @@ export class AuthService {
         });
 
     }
-
     autoAuthData(){
         const authInformation = this.getAuthData();
         if(!authInformation){
@@ -65,6 +64,7 @@ export class AuthService {
         if(expiresIn > 0){
             this.token = authInformation.token;
             this.isAuthenticated = true;
+            this.userId = authInformation.userId;
             this.authStatusListener.next(true);
             this.setAuthTimer(expiresIn/1000);
         }
