@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { environment } from './../../environments/environment';
+
 const BACKEND_URL = environment.apiUrl + "/posts/";
 
 @Injectable({providedIn:'root'})
@@ -50,7 +51,8 @@ export class PostsService {
         });
     }
     getOnePost(id:string){
-        return this.http.get<{_id:string, title:string, content:string, imagePath:string, creator:string}>('http://localhost:3000/api/posts/'+id);
+        return this.http.get<{_id:string, title:string, content:string, imagePath:string, creator:string}>
+        (BACKEND_URL+id);
     }
 
     deletePost(postId:string){
@@ -74,9 +76,8 @@ export class PostsService {
         creator: null
       };
     }
-    this.http
-      .put(BACKEND_URL + id, postData)
-      .subscribe(response => {
+    this.http.put(BACKEND_URL + id, postData)
+    .subscribe(response => {
         this.router.navigate(["/"]);
       });
     }
